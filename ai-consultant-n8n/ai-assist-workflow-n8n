@@ -1,0 +1,150 @@
+{
+  "name": "ai-assist-workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "77362d18-9463-4f29-92ab-85400a500031",
+      "name": "When chat message received",
+      "webhookId": "cab04c11-71f6-4166-b352-eb43af6e5820"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Всегда обращайся в HTTP Request. Ты помощник в ритейл компании для её сотрудников. Возвращай ответ вместе с цитатами из текста. Отвечай на русском. Отвечай коротко, формально и по пунктам. Всегда обращайся в HTTP Request."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "dfdf01d8-61f1-45a3-8501-bf1d9423b8a3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        208
+      ],
+      "id": "048e0adc-5407-4970-8510-32387ab54252",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "toolDescription": "123",
+        "method": "POST",
+        "url": "https://prod-1-data.ke.pinecone.io/assistant/chat/assistant01",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Api-Key",
+              "value": "="
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $json.chatInput }}\"\n    }\n  ],\n  \"stream\": false,\n  \"model\": \"o4-mini\",\n  \"include_highlights\": true\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        208
+      ],
+      "id": "4aa276e4-0889-445e-aa29-794798afa939",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b:free",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "d4a70a9d-e28b-48c4-a5c7-42659bc39007",
+      "name": "OpenRouter Chat Model"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "80b5b78b-d358-496b-a195-40c0f4ad4ca0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fb8b19fe16e70636ab3864e0206ef8cf70ab359f86aa3168e34162b836f5505e"
+  },
+  "id": "zClaDlS0al7MPnVj",
+  "tags": []
+}
