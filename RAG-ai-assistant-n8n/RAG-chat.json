@@ -1,0 +1,177 @@
+{
+  "name": "RAG-chat",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c1924e10-03cc-4541-a12e-b518ff863943",
+      "name": "When chat message received",
+      "webhookId": "89f73b1b-964b-4ad9-a356-83780220b3a3"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Всегда используй Qdrant Vector Store. Ты помощник для сотрудников ритейл компании. Отвечай на русском. Отвечай кратко, формально, по пунктам. Ссылайся на использованные фрагменты текста, включай цитаты. Всегда используй Qdrant Vector Store."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "77c198a5-8a92-48dd-8070-0bfe1ddef97c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b:free",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "917bb6a1-5dac-4b2e-b3af-6e5f20fb43d4",
+      "name": "OpenRouter Chat Model"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "ALWAYS use this tool",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "my-collection",
+          "mode": "list",
+          "cachedResultName": "my-collection"
+        },
+        "includeDocumentMetadata": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        416,
+        208
+      ],
+      "id": "fe9ae252-ea72-49cf-9e9d-b71f79f444b5",
+      "name": "Qdrant Vector Store",
+      "credentials": {
+        "qdrantApi": {
+          "id": "ZmRxaSU9DSmoYZxh",
+          "name": "Qdrant account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        352,
+        336
+      ],
+      "id": "bae612c6-8d14-4203-a7ae-b095c33c868e",
+      "name": "Embeddings HuggingFace Inference"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "148f6627-e405-4177-b91e-c0de5e1c2962",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "67466d46-aae3-4b32-a3a2-6770bbb411ed",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fb8b19fe16e70636ab3864e0206ef8cf70ab359f86aa3168e34162b836f5505e"
+  },
+  "id": "TDchClhuZoNnUrXV",
+  "tags": []
+}
