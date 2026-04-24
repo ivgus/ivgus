@@ -1,7 +1,7 @@
 # AI-агент для консультации
 LLM агент с workflow на n8n на базе gpt-oss-120b (OpenAI, free) и AI-ассистента Pinecone (OpenAI o4-mini), БД Pinecone с открытой документацией Росстата по торговле. Интерактивный чат в среде n8n.
 
-Технологии: n8n, Node.js, Pinecone, json, REST API
+Технологии: n8n, Node.js, Pinecone, json, REST API, LLM модели
 
 Запуск: Импортируйте json workflow в n8n. В блоке OpenRouter Chat Model вставьте свой Api ключ от аккаунта в OpenRouter (агрегатор LLM). В блоке HTTP Request вставьте свой Api ключ связи с БД Pinecone. В Pinecone добавьте данные с официального сайта Росстата в формате pdf и doc. Они автоматически векторизуются. Для начала работы подготовьте среду по указаниям выше и напишите сообщение в чат (например "Напиши, о чём ты мне можешь рассказать.").
 
