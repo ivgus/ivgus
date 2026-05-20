@@ -4,7 +4,7 @@
 Junior ML-инженер. Закончил обучение в КФУ по направлению прикладная математика и информатика (красный диплом). Активно изучаю средства ai- и ml-разработки, статистические методы обработки информации.
 
 # Технологии
-Языки: Python (ООП, Numpy, Pandas, Seaborn, Matplotlib, Scikit-learn, Statmodels), SQL, HTML + REST API, C++, Matlab
+Языки: Python (ООП, Numpy, Pandas, Seaborn, Matplotlib, Scikit-learn, Statmodels, Transformers), SQL, HTML + REST API, C++, Matlab
 
 Фреймворки: PyTorch, TensorFlow/Keras
 
