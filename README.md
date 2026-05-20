@@ -1,16 +1,16 @@
 ## Здравствуйте, меня зовут Игорь! 👋
 
 # О себе
-Junior AI/ML-инженер. Заканчиваю обучение в КФУ по направлению прикладная математика и информатика (красный диплом). Активно изучаю средства ai- и ml-разработки, статистические методы обработки информации.
+Junior ML-инженер. Закончил обучение в КФУ по направлению прикладная математика и информатика (красный диплом). Активно изучаю средства ai- и ml-разработки, статистические методы обработки информации.
 
 # Технологии
-Языки: Python (ООП, Numpy, Pandas, Seaborn, Matplotlib, Scikit-learn, Statmodels), SQL, HTML + REST API, PHP, C++, Matlab
+Языки: Python (ООП, Numpy, Pandas, Seaborn, Matplotlib, Scikit-learn, Statmodels), SQL, HTML + REST API, C++, Matlab
 
-Фреймворки: TensorFlow/Keras
+Фреймворки: PyTorch, TensorFlow/Keras
 
 Базы данных: Qdrant (RAG-системы), Pinecone, Chroma, PostgreSQL, SQLite, СУБД Access
 
-Инструменты: Docker, n8n (no-code платформы), Make, Яндекс Метрика (A/B тесты), Git, PyCharm, Jupiter Notebook, LLM-инструменты, Qt, MS Visual Studio, Excel, командная строка
+Инструменты: Docker, n8n (no-code платформы), Git, PyCharm, Jupiter Notebook, LLM-инструменты, Qt, MS Visual Studio, Excel, командная строка
 
 # Мои проекты
 - RAG-система с AI-агентом для консультации по продажам: чат с агентом на базе no-code платформы n8n с использованием открытых LLM моделей для построения эмбеддингов и консультирования, интеграцией векторной базы данных Qdrant через REST API запросы и загрузкой документации Росстата
