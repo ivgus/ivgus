@@ -10,7 +10,7 @@ Junior ML-инженер. Закончил обучение в КФУ по на�
 
 Базы данных: Qdrant (RAG-системы), Pinecone, Chroma, PostgreSQL, SQLite, СУБД Access
 
-Инструменты: Docker, n8n (no-code платформы), Git, PyCharm, Jupiter Notebook, LLM-инструменты, Qt, MS Visual Studio, Excel, командная строка
+Инструменты: Docker, n8n (no-code платформы), Git, Power BI, PyCharm, Jupiter Notebook, LLM-инструменты, Qt, MS Visual Studio, Excel, командная строка, Gazebo
 
 # Мои проекты
 - Fine Tuning (дообучение) BERT-модели на определение тональности текста: с помощью библиотеки Transformers модель построения эмбеддингов русского текста RuBERT дообучается на большом объёме данных отзывов с известной тональностью
